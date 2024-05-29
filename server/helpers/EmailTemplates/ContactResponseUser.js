@@ -1,13 +1,11 @@
-
-
-exports.OtpMail = (user, otp) => {
+exports.ContactResponseUser = (firstName, lastName, email, phoneNo, message) => {
 
     return `<!DOCTYPE html>
     <html>
     
     <head>
         <meta charset="UTF-8">
-        <title>OTP Verification Email</title>
+        <title>Contact Form Confirmation</title>
         <style>
         body {
             background-color: #ffffff;
@@ -70,22 +68,22 @@ exports.OtpMail = (user, otp) => {
     
     <body>
         <div class="container">
-            <a href="https://eduverse-edtech-project.vercel.app">
-                <div class="logobackground">
-                    <img class="logo" src="./logo.png" alt="EduVerse Logo">
-                </div>
-            </a>
-            <div class="message">OTP Verification Email</div>
+            <a href="https://eduverse-edtech-project.vercel.app"><img class="logo"
+                    src="https://res.cloudinary.com/dzihaxgx8/image/upload/v1712943831/EdTech/mtvpc5zroyt7zahshlvf.png" alt="Eduverse Logo"></a>
+            <div class="message">Contact Form Confirmation</div>
             <div class="body">
-                <p>Dear User,${user}</p>
-                <p>Thank you for registering with EduVerse. To complete your registration, please use the following OTP
-                    (One-Time Password) to verify your account:</p>
-                <h2 class="highlight">${otp}</h2>
-                <p>This OTP is valid for 5 minutes. If you did not request this verification, please disregard this email.
-                    Once your account is verified, you will have access to our platform and its features.</p>
+                <p>Dear ${firstName} ${lastName},</p>
+                <p>Thank you for contacting us. We have received your message and will respond to you as soon as possible.
+                </p>
+                <p>Here are the details you provided:</p>
+                <p>Name: ${firstName} ${lastName}</p>
+                <p>Email: ${email}</p>
+                <p>Phone Number: ${phoneNo}</p>
+                <p>Message: ${message}</p>
+                <p>We appreciate your interest and will get back to you shortly. </p>
             </div>
-            <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-                    href="mailto:info@eduverse.com">info@eduverse.com</a>. We are here to help!</div>
+            <div class="support">If you have any further questions or need immediate assistance, please feel free to reach
+                out to us at <a href="mailto:info@eduverse.com">info@eduverse.com</a>. We are here to help!</div>
         </div>
     </body>
     

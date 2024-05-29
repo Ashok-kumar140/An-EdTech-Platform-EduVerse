@@ -11,6 +11,7 @@ export const userEndPoints = {
   LOGIN_API: BASE_URL + "/auth/login",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
+  CONTACT_FROM_SUBMIT_API: BASE_URL + "/auth/contact-details-submission"
 }
 
 export const paymentEndPoints = {
@@ -46,6 +47,7 @@ export const courseEndpoints = {
     BASE_URL + "/course/getFullCourseDetails",
   LECTURE_COMPLETION_API: BASE_URL + "/course/updateCourseProgress",
   CREATE_RATING_API: BASE_URL + "/course/createRating",
+  GET_REVIEWS_OF_COURSE: BASE_URL + "/course/getReviewsOfCourse"
  
 }
 

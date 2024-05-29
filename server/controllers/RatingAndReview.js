@@ -2,6 +2,7 @@
 const { default: mongoose } = require("mongoose");
 const Course = require("../models/Course");
 const RatingAndReviews = require('../models/RatingAndReview');
+// const RatingAndReview = require("../models/RatingAndReview");
 
 
 
@@ -139,6 +140,38 @@ exports.getAllRatingReview = async (req, res) => {
             message: "Unable to fetched reviews. Please try again"
         })
 
+    }
+}
+
+exports.getReviewsOfCourse = async (req, res) => {
+
+    try {
+        const { courseId } = req.body;
+
+        // console.log(courseId)
+        const course = await Course.findById(courseId);
+
+        if (!course) {
+            return res.status(404).json({
+                success: false,
+                message: `Course not found with id ${courseId}`
+            });
+        }
+        const reviews = await RatingAndReviews.find({ course: courseId }).populate("user");
+        // console.log("reviews", reviews)
+
+        return res.status(200).json({
+            success: true,
+            message: "All reviews of course fetched successfully",
+            reviews
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error while fetching course reviews",
+            error: error
+        })
     }
 }
 

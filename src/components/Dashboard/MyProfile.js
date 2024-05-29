@@ -15,7 +15,9 @@ const MyProfile = () => {
             <div className='flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12'>
                 <div className='flex gap-5 justify-center items-center'>
                     <div >
-                        <img src={user.image} alt="" width={140} height={140} className="aspect-square w-[78px] rounded-full object-cover" />
+                        <img src={user.image} alt="" width={140} height={140} 
+                        className="aspect-square w-[78px] rounded-full object-cover"
+                        loading='lazy' />
                     </div>
                     <div className='space-y-1'>
                         <p className='text-lg font-semibold text-richblack-5'>{user?.firstName}{" "}{user?.lastName}</p>

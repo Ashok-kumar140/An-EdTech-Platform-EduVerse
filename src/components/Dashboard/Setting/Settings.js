@@ -95,7 +95,9 @@ const Settings = () => {
       </h1>
       <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
         <div className="flex items-center justify-between gap-x-4">
-          <img src={previewImage || user?.image} alt="" width={160} height={160} className="aspect-square  rounded-full object-cover" />
+          <img src={previewImage || user?.image} alt="" width={160} height={160}
+            className="aspect-square  rounded-full object-cover"
+            loading="lazy" />
 
 
           <div className="space-y-2">

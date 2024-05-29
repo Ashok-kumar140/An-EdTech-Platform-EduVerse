@@ -9,9 +9,9 @@ exports.Auth = async (req, res, next) => {
     try {
 
         // console.log("Inside Auth1");
-        console.log("token:", req.header("Authorization"));
+        // console.log("token:", req.header("Authorization"));
         const token = req.cookies.token || req.body.token || req.header("Authorization")?.replace("Bearer ", "");
-        console.log("Inside Auth2");
+        // console.log("Inside Auth2");
         // console.log("Token:", token)
 
         if (!token) {
@@ -20,13 +20,13 @@ exports.Auth = async (req, res, next) => {
                 message: "Token is missing"
             })
         }
-        console.log("Inside Auth3");
+        // console.log("Inside Auth3");
 
 
         try {
             // Verifying the JWT using the secret key stored in environment variables
             const decode = jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decode);
+            // console.log(decode);
             // Storing the decoded JWT payload in the request object for further use
             req.user = decode;
         } catch (error) {

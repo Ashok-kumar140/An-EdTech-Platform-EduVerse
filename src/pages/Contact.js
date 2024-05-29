@@ -52,7 +52,7 @@ const Contact = () => {
                     </div>
                 </div>
 
-                {/* Contact Form */}
+                
                 <div className="lg:w-[60%]">
                     <div className="border border-richblack-600 text-richblack-300 rounded-xl p-7 lg:p-14 flex gap-3 flex-col">
                         <h1 className="text-4xl leading-10 font-semibold text-richblack-5">

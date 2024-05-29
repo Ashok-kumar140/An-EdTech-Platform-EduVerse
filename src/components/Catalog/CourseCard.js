@@ -22,6 +22,7 @@ const CourseCard = ({ course, Height }) => {
                             src={course?.thumbnail}
                             alt="course thumbnail"
                             className={`${Height} w-full rounded-xl object-cover `}
+                            loading="lazy"
                         />
                     </div>
                     <div className="flex flex-col gap-2 px-1 py-3">

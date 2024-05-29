@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaArrowRight } from "react-icons/fa6";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/Button';
 import introVideo from '../assets/images/introVideo.mp4'
 import CodeSection from '../components/HomePage/CodeSection';
@@ -11,21 +11,28 @@ import CardSection from '../components/HomePage/CardSection';
 import HighlightedText from '../components/HighlightedText';
 import ReviewSlider from '../components/ReviewSlider';
 import Footer from '../components/Footer';
+import { useSelector } from 'react-redux';
+import { ACCOUNT_TYPE } from '../helpers/constants';
 
 // import { TypeAnimation } from "react-type-animation";
 const Home = () => {
+
+    const { user } = useSelector((state) => state.profile);
+    const navigate = useNavigate();
     return (
         <div>
 
             <div className='w-11/12 relative mx-auto max-w-maxContent flex-col items-center justify-between gap-12 text-white '>
-                <Link to={"/signup"} className=''>
-                    <div className="mx-auto mt-16 w-fit h-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-105 hover:drop-shadow-none mb-10">
-                        <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[8px] transition-all duration-500 hover:bg-richblack-900 hover:text-white">
-                            <p>Become an Instructor</p>
-                            <FaArrowRight />
+                <div className='flex items-center justify-center'>
+                    <div onClick={() => { user ? (user.role === ACCOUNT_TYPE.STUDENT ? (navigate('/signup')) : (navigate('dashboard/my-courses'))) : (navigate('/signup')) }} className='cursor-pointer w-21'>
+                        <div className="mx-auto mt-16 w-fit h-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-105 hover:drop-shadow-none mb-10">
+                            <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[8px] transition-all duration-500 hover:bg-richblack-900 hover:text-white">
+                                <p>Become an Instructor</p>
+                                <FaArrowRight />
+                            </div>
                         </div>
                     </div>
-                </Link>
+                </div>
 
 
                 <h1 className='text-center text-4xl font-semibold mb-10'>
@@ -37,8 +44,8 @@ const Home = () => {
 
 
                 <div className='flex gap-7 items-center justify-center mb-20'>
-                    <Button linkTo={"/signup"} bgColor={"bg-yellow-50 text-black"}>Learn More</Button>
-                    <Button linkTo={"/login"} bgColor={"bg-richblack-800"}>Book Demo</Button>
+                    <button onClick={() => { user ? (navigate('/dashboard/my-profile')) : (navigate('/signup')) }} className={`text-center text-[13px] sm:text-[16px] px-6 py-3 rounded-md font-bold shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] hover:shadow-none hover:scale-95 transition-all duration-200 bg-yellow-50 text-black`}>Learn More</button>
+                    <button onClick={() => navigate('/contact')} className="bg-richblack-800 text-center text-[13px] sm:text-[16px] px-6 py-3 rounded-md font-bold shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] hover:shadow-none hover:scale-95 transition-all duration-200">Book Demo</button>
 
 
                 </div>
@@ -48,6 +55,7 @@ const Home = () => {
                         className="shadow-[20px_20px_rgba(255,255,255)]"
                         muted
                         loop
+                        loading="lazy"
                         autoPlay
                         src={introVideo}
                         type="video/mp4"
@@ -74,7 +82,7 @@ const Home = () => {
                             Explore Full Catalog  ➡
 
                         </Button>
-                        <Button linkTo={"/login"} bgColor={"bg-richblack-800 text-white hover:scale(110)"}>Learn More</Button>
+                        <Button linkTo={user === ACCOUNT_TYPE.STUDENT ? ('/dashboard/enrolled-courses') : ("dashboard/my-profile")} bgColor={"bg-richblack-800 text-white hover:scale(110)"}>Learn More</Button>
 
                     </div>
                 </div>
@@ -88,7 +96,7 @@ const Home = () => {
 
                             <p className='text-[16px]'>The modern EduVerse is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
 
-                            <Button bgColor={'bg-yellow-50'} linkTo={'/signup'} className="m-10">Learn more</Button>
+                            <Button bgColor={'bg-yellow-50'} linkTo={user === ACCOUNT_TYPE.STUDENT ? ('/dashboard/enrolled-courses') : ("dashboard/my-profile")} className="m-10">Learn more</Button>
 
                         </div>
                     </div>

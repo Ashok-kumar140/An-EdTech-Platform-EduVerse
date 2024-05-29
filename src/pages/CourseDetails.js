@@ -2,15 +2,11 @@
 import React, { useEffect, useState } from "react"
 import { BiInfoCircle } from "react-icons/bi"
 import { HiOutlineGlobeAlt } from "react-icons/hi"
-// import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import Markdown from 'react-markdown'
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import ConfirmationModal from "../components/ConfirmationModal"
-// import Footer from "../components/Common/Footer"
 import RatingStars from "../components/Catalog/RatingStars"
-// import CourseAccordionBar from "../components/core/Course/CourseAccordionBar"
-// import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
 import { FormateDate } from "../helpers/FormateDate"
 import GetAvgRating from "../helpers/AverageRating"
 import Error from "./Error"
@@ -22,9 +18,6 @@ import CourseDetailsCard from "../components/Course/CourseDetailCard"
 import { ACCOUNT_TYPE } from "../helpers/constants"
 import { addToCart } from "../redux/slices/cartSlice"
 import { buyCourse } from "../Services/Payment"
-// import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
-// import { BuyCourse } from "../services/operations/studentFeaturesAPI"
-
 
 const CourseDetails = () => {
     const { user } = useSelector((state) => state.profile)
@@ -171,7 +164,7 @@ const CourseDetails = () => {
                             <img
                                 src={courseData?.courseDetails?.thumbnail}
                                 alt="course thumbnail"
-                                // className="aspect-auto w-full"
+                                loading="lazy"
                                 className="max-h-[400px] min-h-[200px] h-[300px] w-[400px] md:w-[700px] md:h-[400px]overflow-hidden rounded-2xl object-cover md:max-w-full"
                             />
                         </div>
@@ -219,7 +212,7 @@ const CourseDetails = () => {
                             >
 
                                 {
-                                    user?.courses.includes(courseId) ? "Go To Course Page" : "Buy Now"
+                                    user?.courses?.includes(courseId) ? "Go To Course Page" : "Buy Now"
                                 }
                             </button>
                             {(!user || !user.courses?.includes(courseId)) && (
@@ -301,6 +294,7 @@ const CourseDetails = () => {
                                             ? courseData?.courseDetails?.instructor?.image
                                             : `https://api.dicebear.com/5.x/initials/svg?seed=${courseData?.courseDetails?.instructor?.firstName} ${courseData?.courseDetails?.instructor?.lastName}`
                                     }
+                                    loading="lazy"
                                     alt="Author"
                                     className="h-14 w-14 rounded-full object-cover"
                                 />

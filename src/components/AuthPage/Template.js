@@ -26,15 +26,15 @@ const Template = (props) => {
                         </p>
                         {formType === "signup" ? <SignupForm /> : <LoginForm />}
                     </div>
-                    <div className="relative mx-auto w-11/12 max-w-[450px] min-h-[90vh] md:mx-0 flex items-center justify-center">
+                    <div className=" mx-auto w-11/12 max-w-[550px] min-h-[80vh] md:mx-0 flex items-center justify-center">
 
                         <img
                             src={image}
                             alt="Students"
-                            width={558}
-                            height={504}
+                            // width={558}
+                            height={604}
                             loading="lazy"
-                            className="absolute -top-4 right-4 z-10"
+                            className="top-4 right-4 z-10 object-fill"
                         />
                     </div>
                 </div>

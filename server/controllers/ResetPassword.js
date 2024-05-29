@@ -1,3 +1,4 @@
+const { updatePasswordLink } = require('../helpers/EmailTemplates/UpdatePasswordTemplate');
 const sendMailer = require('../helpers/SendMail');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
@@ -35,7 +36,7 @@ exports.resetPasswordToken = async (req, res) => {
 
         const url = `http://localhost:3000/update-password/${token}`;
 
-        const mailResponse = sendMailer(email, "For updating your password", `You can update your password in this link: ${url}`);
+        const mailResponse = sendMailer(email, "For updating your password", updatePasswordLink(`${user.firstName} ${user.lastName}`,url));
 
         return res.status(200).json({
             success: true,

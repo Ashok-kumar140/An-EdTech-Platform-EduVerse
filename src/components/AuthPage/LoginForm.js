@@ -50,7 +50,7 @@ const LoginForm = () => {
 
             toast.success("Logged In Successfully");
             dispatch(setToken(data?.user?.token));
-            
+
             dispatch(setUser(data?.user))
             localStorage.setItem("token", JSON.stringify(data?.user?.token));
             localStorage.setItem("user", JSON.stringify(data?.user));
@@ -76,7 +76,7 @@ const LoginForm = () => {
             className="mt-6 flex w-full flex-col gap-y-4"
         >
             <label className="w-full">
-                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                <p className="label-style">
                     Email Address <sup className="text-pink-200">*</sup>
                 </p>
                 <input
@@ -86,12 +86,11 @@ const LoginForm = () => {
                     value={formData.email}
                     onChange={handleOnChange}
                     placeholder="Enter email address"
-                    className='bg-slate-800 p-[12px] bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full'
-                    style={{ "boxShadow": "rgba(255, 255, 255, 0.18) 0px -1px 0px inset" }}
+                    className='input-field-style'
                 />
             </label>
             <label className="relative">
-                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                <p className="label-style">
                     Password <sup className="text-pink-200">*</sup>
                 </p>
                 <input
@@ -101,8 +100,7 @@ const LoginForm = () => {
                     value={formData.password}
                     onChange={handleOnChange}
                     placeholder="Enter Password"
-                    className='bg-slate-800 p-[12px] bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full'
-                    style={{ "boxShadow": "rgba(255, 255, 255, 0.18) 0px -1px 0px inset" }}
+                    className='input-field-style'
                 />
                 <span
                     onClick={() => setShowPassword((prev) => !prev)}
@@ -126,6 +124,9 @@ const LoginForm = () => {
             >
                 Sign In
             </button>
+            <Link className='text-[#38bdf8] font-semibold text-center' to={'/signup'}>
+                New User? Create your account.
+            </Link>
         </form>
     )
 }

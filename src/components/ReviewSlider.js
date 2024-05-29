@@ -62,6 +62,7 @@ const ReviewSlider = () => {
                                                 ? review?.user?.image
                                                 : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                                         }
+                                        loading="lazy"
                                         alt=""
                                         className="h-9 w-9 rounded-full object-cover"
                                     />
@@ -125,6 +126,7 @@ const ReviewSlider = () => {
                                                 ? review?.user?.image
                                                 : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                                         }
+                                        loading="lazy"
                                         alt=""
                                         className="h-9 w-9 rounded-full object-cover"
                                     />

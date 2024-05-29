@@ -41,7 +41,7 @@ const SkillSection = () => {
                         <div className="flex flex-col lg:gap-3" key={index}>
                             <div className="flex gap-6" key={index}>
                                 <div className="w-[52px] h-[52px] bg-white rounded-full flex justify-center items-center shadow-[#00000012] shadow-[0_0_62px_0]">
-                                    <img src={item.Logo} alt="" />
+                                    <img src={item.Logo} alt="" loading='lazy'/>
                                 </div>
                                 <div>
                                     <h2 className="font-semibold text-[18px]">{item.Heading}</h2>
@@ -81,6 +81,7 @@ const SkillSection = () => {
                     muted
                     loop
                     autoPlay
+                    loading="lazy"
                     src={TimeLineVideo}
                     type="video/mp4"
                 >

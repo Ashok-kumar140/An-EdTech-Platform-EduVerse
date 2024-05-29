@@ -21,21 +21,62 @@ const UpdatePassword = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
+    const [criteria, setCriteria] = useState({
+        length: false,
+        uppercase: false,
+        lowercase: false,
+        number: false,
+        specialChar: false,
+    });
 
     const { password, confirmPassword } = formData;
 
     const handleOnChange = (e) => {
 
         e.preventDefault();
-
+        const { name, value } = e.target;
         setFormData((prevData) => (
             {
                 ...prevData,
-                [e.target.name]: e.target.value,
+                [name]: value,
             }
         ))
+        if (name === 'password') {
+            setCriteria(validatePassword(value));
+        }
 
     }
+    const validatePassword = (password) => {
+        return {
+            length: password.length >= 8,
+            uppercase: /[A-Z]/.test(password),
+            lowercase: /[a-z]/.test(password),
+            number: /\d/.test(password),
+            specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+        };
+
+    }
+    const renderCriteria = () => {
+        const criteriaList = [
+            { label: "At least 8 characters", valid: criteria.length },
+            { label: "At least one uppercase letter", valid: criteria.uppercase },
+            { label: "At least one lowercase letter", valid: criteria.lowercase },
+            { label: "At least one number", valid: criteria.number },
+            { label: "At least one special character", valid: criteria.specialChar },
+        ];
+
+        return criteriaList.map((criterion, index) => (
+            <li key={index} className={` flex items-center justify-start ${criterion.valid ? 'text-[#05BF00]' : 'text-[#e11d48]'}`}>
+                <span
+                    className={`flex items-center text-sm justify-center w-3 h-3 rounded-full text-black mr-2 ${criterion.valid ? 'bg-[#05BF00]' : 'bg-[#e11d48]'
+                        }`}
+                >
+                    {criterion.valid ? '✔' : '-'}
+                </span>
+                {criterion.label}
+            </li>
+        ));
+    };
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
@@ -45,7 +86,13 @@ const UpdatePassword = () => {
     };
 
     const handleResetPassword = async () => {
+        // e.preventDefault()
 
+        const passwordCriteria = validatePassword(formData.password);
+        if (!Object.values(passwordCriteria).every(Boolean)) {
+            toast.error("Password is not strong")
+            return;
+        }
         dispatch(setLoading(true));
         try {
 
@@ -84,40 +131,46 @@ const UpdatePassword = () => {
 
                         <form onSubmit={handleOnSubmit} className='relative' >
                             <label htmlFor="password" className="relative">
-                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                                <p className="label-style">
                                     New Password <sup className="text-pink-200">*</sup>
                                 </p>
 
-                                <input type={`${!showPassword ? "password" : "text"}`} required name='password' value={formData.password} placeholder='Enter Password' onChange={handleOnChange} className='form-style w-full !pr-10 p-[12px] bg-richblack-800 rounded-[0.5rem] text-richblack-5'
-                                    style={{ "boxShadow": "rgba(255, 255, 255, 0.18) 0px -1px 0px inset" }} />
+                                <input type={`${!showPassword ? "password" : "text"}`} required name='password'
+                                    value={formData.password} placeholder='Enter Password'
+                                    onChange={handleOnChange} className='input-field-style mb-3' />
+                                <ul className='mb-5'>
+                                    {renderCriteria()}
+                                </ul>
 
 
                             </label>
                             {
                                 showPassword ? (
 
-                                    <BsEyeSlash className='absolute left-[93%] top-[18%] text-white' onClick={(e) => setShowPassword(!showPassword)} />
+                                    <BsEyeSlash className='absolute left-[93%] top-[12%] text-white' onClick={(e) => setShowPassword(!showPassword)} />
                                 ) : (
 
-                                    <MdOutlineRemoveRedEye className='absolute left-[93%] top-[18%] text-white' onClick={(e) => setShowPassword(!showPassword)} />
+                                    <MdOutlineRemoveRedEye className='absolute left-[93%] top-[12%] text-white' onClick={(e) => setShowPassword(!showPassword)} />
                                 )
                             }
 
-                            <label htmlFor="confirmPassword" className="relative mt-5">
-                                <p className="mb-1 mt-3 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                            <label htmlFor="confirmPassword" className="relative mt-14">
+                                <p className="label-style">
                                     Confirm New Password <sup className="text-pink-200">*</sup>
                                 </p>
 
-                                <input type={`${!showConfirmedPassword ? "password" : "text"}`} required name='confirmPassword' value={formData.conformPassword} placeholder='Renter Password' onChange={handleOnChange} className='form-style w-full !pr-10 p-[12px] bg-richblack-800 rounded-[0.5rem] text-richblack-5'
-                                    style={{ "boxShadow": "rgba(255, 255, 255, 0.18) 0px -1px 0px inset" }} />
+                                <input type={`${!showConfirmedPassword ? "password" : "text"}`} required name='confirmPassword'
+                                    value={formData.conformPassword} placeholder='Renter Password'
+                                    onChange={handleOnChange} className='input-field-style'
+                                />
                             </label>
                             {
                                 showConfirmedPassword ? (
 
-                                    <BsEyeSlash className='absolute left-[93%] top-[55%] text-white' onClick={(e) => setShowConfirmedPassword(!showConfirmedPassword)} />
+                                    <BsEyeSlash className='absolute left-[93%] top-[73%] text-white' onClick={(e) => setShowConfirmedPassword(!showConfirmedPassword)} />
                                 ) : (
 
-                                    <MdOutlineRemoveRedEye className='absolute left-[93%] top-[55%] text-white' onClick={(e) => setShowConfirmedPassword(!showConfirmedPassword)} />
+                                    <MdOutlineRemoveRedEye className='absolute left-[93%] top-[73%] text-white' onClick={(e) => setShowConfirmedPassword(!showConfirmedPassword)} />
                                 )
                             }
 

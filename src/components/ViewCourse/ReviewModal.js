@@ -61,6 +61,7 @@ const ReviewModal = ({ setReviewModal }) => {
                         <img
                             src={user?.image}
                             alt={user?.firstName + "profile"}
+                            loading='lazy'
                             className="aspect-square w-[50px] rounded-full object-cover"
                         />
                         <div className="">

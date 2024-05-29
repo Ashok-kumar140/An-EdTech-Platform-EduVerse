@@ -137,6 +137,7 @@ const MyCourse = () => {
                                                 <img
                                                     src={course?.thumbnail}
                                                     alt={course?.courseTitle}
+                                                    loading='lazy'
                                                     className="h-[148px] w-[220px] rounded-lg object-cover"
                                                 />
                                                 <div className="flex flex-col justify-between">

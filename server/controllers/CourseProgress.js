@@ -22,7 +22,7 @@ exports.updateCourseProgress = async (req, res) => {
       courseId: courseId,
       userId: userId,
     })
-    console.log("PRO", courseProgress);
+    // console.log("PRO", courseProgress);
 
     if (!courseProgress) {
       // If course progress doesn't exist, create a new one
@@ -40,7 +40,7 @@ exports.updateCourseProgress = async (req, res) => {
       courseProgress.completedVideos.push(subSectionId)
     }
 
-    console.log("!!!!!")
+    // console.log("!!!!!")
     // Save the updated course progress
     await courseProgress.save()
 

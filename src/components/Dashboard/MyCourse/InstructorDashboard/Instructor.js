@@ -106,6 +106,7 @@ const Instructor = () => {
                                     <img
                                         src={course.thumbnail}
                                         alt={course.courseName}
+                                        loading="lazy"
                                         className="h-[201px] w-full rounded-md object-cover"
                                     />
                                     <div className="mt-3 w-full">

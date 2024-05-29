@@ -248,6 +248,7 @@ const Navbar = () => {
                                         <img
                                             src={user?.image}
                                             alt={`profile-${user?.firstName}`}
+                                            loading="lazy"
                                             className="aspect-square w-[50px] rounded-full object-cover"
                                         />
                                         <div className="flex gap-3 items-center">

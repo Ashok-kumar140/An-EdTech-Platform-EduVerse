@@ -76,11 +76,10 @@ const ForgotPassword = () => {
                             {
                                 !isEmailSent && (
                                     <label htmlFor="" className="w-full">
-                                        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                                        <p className="label-style">
                                             Email Address:<sup className="text-pink-200">*</sup>
                                         </p>
-                                        <input type="email" className='w-full p-[12px] bg-richblack-800 rounded-[0.5rem] text-richblack-5'
-                                            style={{ "boxShadow": "rgba(255, 255, 255, 0.18) 0px -1px 0px inset" }}
+                                        <input type="email" className='input-field-style'
                                             required
                                             value={email}
                                             name='email'

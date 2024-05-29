@@ -37,7 +37,7 @@ const CourseSidebar = ({ setReviewModal }) => {
 
     return (
         <>
-            <div className=' flex h-[calc(100vh-3.5rem)] min-w-[250px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10'>
+            <div className=' hidden md:flex h-[calc(100vh-3.5rem)] min-w-[250px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10'>
                 <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 py-5 text-lg font-bold text-richblack-25">
                     <div className="flex w-full items-center justify-between ">
                         <div

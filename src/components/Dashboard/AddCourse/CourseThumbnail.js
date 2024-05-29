@@ -65,6 +65,7 @@ const CourseThumbnail = ({ name, label, register, setValue, errors, video = fals
                                 src={previewSource}
                                 alt="Preview"
                                 className="h-full w-full rounded-md object-cover"
+                                loading='lazy'
                             />
                         ) : (
                             <Player aspectRatio="16:9" playsInline src={previewSource} />

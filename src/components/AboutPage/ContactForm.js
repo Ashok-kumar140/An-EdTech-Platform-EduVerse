@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import CountryCode from '../../data/countryCode.json';
+import { userEndPoints } from '../../apis/apis';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 const ContactForm = () => {
 
     const [loading, setLoading] = useState(false);
@@ -8,25 +11,36 @@ const ContactForm = () => {
         register,
         handleSubmit,
         reset,
-        formState: { errors, isSubmitSuccessful },
+        formState: { errors },
     } = useForm();
 
     useEffect(() => {
-        if (isSubmitSuccessful) {
-            reset({
-                email: "",
-                firstname: "",
-                lastname: "",
-                message: "",
-                phoneNo: "",
-            })
-        }
-    }, [reset, isSubmitSuccessful]);
 
-    const handleContactForm = (e) => {
+
+    }, []);
+
+    const handleContactForm = async (values) => {
+
+        const formData = new FormData()
+        formData.append("firstName", values.firstName)
+        formData.append("lastName", values.lastName)
+        formData.append("email", values.email)
+        formData.append("phoneNo", values.countryCode + "-" + values.phoneNo)
+        formData.append("message", values.message)
+        console.log("form data", formData)
 
         setLoading(true);
         try {
+
+            const { data } = await axios.post(userEndPoints.CONTACT_FROM_SUBMIT_API, formData);
+            console.log("DATA FROM CONTACT FORM API:", data);
+            if (!data.success) {
+                throw new Error(data);
+            }
+            toast.success("Your message sent successfully")
+            reset({
+                email: "", firstName: "", lastName: "", message: "", phoneNo: ""
+            });
 
         } catch (error) {
             console.log("Error while calling API for contact form submit :", error.message);
@@ -97,7 +111,7 @@ const ContactForm = () => {
             </div>
 
             <div className="flex flex-col gap-2">
-                <label htmlFor="phoneNumber" className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                <label htmlFor="phoneNo" className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                     Phone Number <sup className="text-pink-200">*</sup>
                 </label>
 
@@ -125,10 +139,10 @@ const ContactForm = () => {
                     <div className="flex w-[calc(100%-90px)] flex-col gap-2">
                         <input
                             type="number"
-                            name="phoneNumber"
-                            id="phoneNumber"
+                            name="phoneNo"
+                            id="phoneNo"
                             placeholder="12345 67890"
-                            {...register("phoneNumber", {
+                            {...register("phoneNo", {
                                 required: {
                                     value: true,
                                     message: "Please enter your Phone Number.",
@@ -141,9 +155,9 @@ const ContactForm = () => {
                         />
                     </div>
                 </div>
-                {errors.phoneNumber && (
+                {errors.phoneNo && (
                     <span className="-mt-1 text-[12px] text-pink-200">
-                        {errors.phoneNumber.message}
+                        {errors.phoneNo.message}
                     </span>
                 )}
             </div>
@@ -177,7 +191,7 @@ const ContactForm = () => {
                     "transition-all duration-200 hover:scale-95 hover:shadow-none"
                     }  disabled:bg-richblack-500 sm:text-[16px] `}
             >
-                Send Message
+                {loading? "Loading...":"Send Message"}
             </button>
         </form>
     )

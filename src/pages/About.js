@@ -79,6 +79,7 @@ const About = () => {
                                 alt=""
                                 className="shadow-[0_0_20px_0] shadow-[#FC6767]"
                                 width={"full"}
+                                loading='lazy'
                             />
                         </div>
                     </div>
@@ -88,12 +89,7 @@ const About = () => {
                                 Our Vision
                             </h1>
                             <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
-                                With this vision in mind, we set out on a journey to create an
-                                e-learning platform that would revolutionize the way people
-                                learn. Our team of dedicated experts worked tirelessly to
-                                develop a robust and intuitive platform that combines
-                                cutting-edge technology with engaging content, fostering a
-                                dynamic and interactive learning experience.
+                                At Eduverse, our vision is to be the leading platform for technical skills education, empowering individuals to excel in the ever-evolving tech landscape. We aim to democratize access to high-quality technical education, ensuring that everyone has the chance to develop the skills needed for success in the digital age. We envision a world where learning technical skills is engaging, accessible, and transformative, opening doors to new career paths and opportunities.
                             </p>
                         </div>
                         <div className="mt-10 lg:my-24 flex lg:w-[40%] flex-col gap-10">

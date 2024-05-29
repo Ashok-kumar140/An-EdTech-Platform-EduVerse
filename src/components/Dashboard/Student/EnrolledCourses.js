@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProgressBar from "@ramonak/react-progress-bar"
 import Tab from '../../Tab';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import axios from 'axios';
 import { profileEndPoints } from '../../../apis/apis';
@@ -46,8 +45,6 @@ const EnrolledCourses = () => {
 
         try {
 
-            console.log("Token inside function:", token);
-
             const { data } = await axios.get(profileEndPoints.GET_ENROLLED_COURSES_API, {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -69,7 +66,7 @@ const EnrolledCourses = () => {
         setLoading(false);
     }
 
-    console.log("Enrolled courses", enrolledCourses);
+    // console.log("Enrolled courses", enrolledCourses);
 
    
     return (
@@ -115,6 +112,7 @@ const EnrolledCourses = () => {
                                             <img
                                                 src={course.thumbnail}
                                                 alt="course_img"
+                                                loading="lazy"
                                                 className="h-14 w-14 rounded-lg object-cover"
                                             />
                                             <div className="flex max-w-xs flex-col gap-2">

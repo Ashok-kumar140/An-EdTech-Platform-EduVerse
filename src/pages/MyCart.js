@@ -39,6 +39,7 @@ const MyCart = () => {
                                         src={course?.thumbnail}
                                         alt={course?.courseName}
                                         className="h-[148px] w-[220px] rounded-lg object-cover"
+                                        loading='lazy'
                                     />
                                     <div className="flex flex-col space-y-1">
                                         <p className="text-lg font-medium text-richblack-5">
